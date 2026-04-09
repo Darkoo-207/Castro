@@ -1,1 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=|, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="estado">No has iniciado sesión</h2>
+<button id="btnSesion">Iniciar sesión</button>
 
+<script>
+  const estado = document.getElementById("estado");
+  const boton = document.getElementById("btnSesion");
+
+  function actualizarUI() {
+    const sesion = localStorage.getItem("sesionActiva");
+
+    if (sesion === "true") {
+      estado.textContent = "Sesión iniciada";
+      boton.textContent = "Cerrar sesión";
+    } else {
+      estado.textContent = "No has iniciado sesión";
+      boton.textContent = "Iniciar sesión";
+    }
+  }
+
+  boton.addEventListener("click", () => {
+    const sesion = localStorage.getItem("sesionActiva");
+
+    if (sesion === "true") {
+      localStorage.setItem("sesionActiva", "false");
+      alert("Has cerrado sesión");
+    } else {
+      localStorage.setItem("sesionActiva", "true");
+      alert("Has iniciado sesión");
+    }
+
+    actualizarUI();
+  });
+
+  // Inicializar
+  actualizarUI();
+</script>
+
+</body>
+</html>
